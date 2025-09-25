@@ -109,6 +109,27 @@ Once running, the app will be available at [http://localhost:3000](http://localh
 
 ---
 
+## Authentication (Supabase SMS via Twilio)
+
+This project uses Supabase Auth with SMS OTP (Twilio) for login and registration.
+
+### Environment variables
+
+Create `.env.local` with:
+
+```
+NEXT_PUBLIC_SUPABASE_URL=your-supabase-url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
+```
+
+Configure Twilio inside the Supabase dashboard under Authentication > Providers > Twilio (Account SID, Auth Token, From number).
+
+### Behavior
+
+- Unauthenticated users are redirected to `/auth/login`.
+- Phone OTP is available on login/register screens.
+- Successful verification redirects to `/dashboard`.
+
 > [!IMPORTANT]  
 > This project is frequently updated. If you’re working from a fork or a previously cloned copy, check for the latest changes before syncing. Some updates may include breaking changes.
 

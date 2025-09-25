@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { AuthManager } from "@/managers/auth-manager";
 
 import { cookies } from "next/headers";
 
@@ -25,6 +26,9 @@ import { SearchDialog } from "./_components/sidebar/search-dialog";
 import { ThemeSwitcher } from "./_components/sidebar/theme-switcher";
 
 export default async function Layout({ children }: Readonly<{ children: ReactNode }>) {
+  // Enforce auth at layout level as a safety net in addition to middleware
+  const auth = new AuthManager();
+  await auth.requireAuth();
   const cookieStore = await cookies();
   const defaultOpen = cookieStore.get("sidebar_state")?.value === "true";
 
